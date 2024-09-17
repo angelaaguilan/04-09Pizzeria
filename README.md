@@ -2,6 +2,6 @@
 
 DESAFÍO REACT
 
-Pizzeria v6 - Context
+Pizzeria v7 - React Router II
 
-REPOSITORIO: https://github.com/angelaaguilan/04-08Pizzeria
+REPOSITORIO: https://github.com/angelaaguilan/04-09Pizzeria
