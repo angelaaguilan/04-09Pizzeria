@@ -1,5 +1,5 @@
 // Carrito de compras
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -8,8 +8,8 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import carroCompra from "../assets/imgs/carroCompra.png";
 import ListGroup from "react-bootstrap/ListGroup";
-import CardContext from "../context/CardContext";
-import UserContext from "../context/UserContext";
+import { CardContext } from "../context/CardContext";
+import { UserContext } from "../context/UserContext";
 
 export const Cart = () => {
   const styleCard = {
@@ -82,30 +82,24 @@ export const Cart = () => {
       // Busca indice de la pizza para restar la cantidad
       const index = nuevasPizzas.findIndex((el) => el.id === pizza.id);
       nuevasPizzas[index].cantidad = pizza.cantidad - 1;
-      console.log("listado original");
-      console.log(nuevasPizzas);
 
       // Actualizar cantidad en el carrito de compra
       setListaPizzas(nuevasPizzas);
-      console.log("listado actualizado");
-      console.log(listaPizzas);
 
       // Actualizar Total a Pagar según Pizza eliminada
       setTotal(total - pizza.price);
 
       // Eliminar Pizza con cantidad = 0
-      console.log("cantidad de pizzas");
-      console.log(nuevasPizzas[index].cantidad);
       if (nuevasPizzas[index].cantidad === 0) {
         const listaActualizada = listaPizzas.filter(
           (pizzaNull) => pizzaNull.id !== pizza.id
         );
-        console.log("lista sin cantidades = 0");
-        console.log(listaActualizada);
         setListaPizzas(listaActualizada);
       }
     }
   };
+
+
 
   return (
     <>
@@ -122,8 +116,8 @@ export const Cart = () => {
                 <Button
                   variant="dark"
                   type="submit"
-                  style={{ width: "30%", padding: "2px" }}
-                  disabled
+                  style={{ width: "30%", padding: "2px" }}          
+                  className={ token ? "" : "disabled" }
                 >
                   Pagar
                 </Button>

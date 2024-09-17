@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
+  const { user } = useContext(UserContext);
+  const { token, setToken } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+    const email2 = form.email.value;
     const password2 = form.password.value;
     event.preventDefault();
 
@@ -16,17 +23,30 @@ const Login = () => {
       event.stopPropagation();
       setValidated(true);
       return;
-    } if (password2.length < 6) {
+    }
+
+    if (password2.length < 6) {
       alert("Password debe tener al menos 6 caracteres");
       event.stopPropagation();
       setValidated(true);
       return;
-    } 
-    alert(`Authentication successful!`)
-    setValidated(false);
-    form.email.value = '';
-    form.password.value= '';
+    }
+
+    if ((email2 !== user.email) || (password2 !== user.password)) {
+      alert("Datos ingresados inválidos");
+      event.stopPropagation();
+      setValidated(true);
+      return;
+    }
+
+//    alert(`Authentication successful!`);
+    setValidated(false);    
+    setToken(true);
+    form.email.value = "";
+    form.password.value = "";
+    navigate(`/`);
   };
+
 
   return (
     <div className="container-fluid">

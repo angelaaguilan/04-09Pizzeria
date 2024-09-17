@@ -6,7 +6,7 @@ import carroCompra from '../assets/imgs/carroCompra.png';
 import eyes from '../assets/imgs/eyes.png';
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
-import CardContext from "../context/CardContext";
+import { CardContext } from "../context/CardContext";
 import { useNavigate } from "react-router-dom";
 
 
@@ -20,7 +20,7 @@ export const CardPizza = ({ pizza }) => {
   };
 
   const navigate = useNavigate();
-  
+
   const precio = Intl.NumberFormat("de-DE").format(pizza.price);
 
   //  genera la lista de pizzas en el carrito (CONTEXT)
@@ -48,7 +48,7 @@ export const CardPizza = ({ pizza }) => {
     }
   };
 
-  const detallePizza = () => {
+  const detallePizza = (pizza) => {
     navigate(`/pizza/${pizza.id}`);
   };
 
@@ -77,10 +77,11 @@ export const CardPizza = ({ pizza }) => {
 
         <Card.Footer className="p-4 text-center">
           <Card.Text className="h4 mb-4"> Precio: ${precio}</Card.Text>
+
           <Button
             variant="outline-dark"
             className="mx-3"
-            onClick={detallePizza}
+            onClick={() => detallePizza(pizza)}
           >
             <Link to="/pizza/" className="text-dark ms-3 text-decoration-none">
               Ver más
@@ -99,6 +100,8 @@ export const CardPizza = ({ pizza }) => {
             </Link>{" "}
             <Image src={carroCompra} />
           </Button>
+
+
         </Card.Footer>
       </Card>
     </>

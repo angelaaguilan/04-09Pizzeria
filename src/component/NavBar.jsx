@@ -1,4 +1,3 @@
-
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -11,18 +10,20 @@ import PizzaTrozo from '../assets/imgs/PizzaTrozo.png';
 import carroCompra from '../assets/imgs/carroCompra.png';
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
-import UserContext from "../context/UserContext.jsx";
-import CardContext from "../context/CardContext.jsx";
+import { UserContext } from "../context/UserContext.jsx";
+import { CardContext } from "../context/CardContext.jsx";
+import { NavLink } from 'react-bootstrap';
 
 
 const NavBar = () => {
   const { total } = useContext(CardContext);
   const { token, setToken } = useContext(UserContext);
 
+  
   // Realiza el logout
-  const logout = () => {
-    setToken(!token);
-  };
+  function logout() {
+    setToken(false);
+  }
 
   return (
     <Navbar expand="lg" className="bg-dark">
@@ -35,12 +36,14 @@ const NavBar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
+  
             <Button variant="outline-light" className="text-white">
               <Image src={PizzaTrozo} />
               <Link to="/" className="text-white ms-3 text-decoration-none">
                 Home
               </Link>
             </Button>{" "}
+
             <Button variant="outline-light" className="text-white">
               <Image src={token ? lockOpen : lock} />
               {token ? (
@@ -59,24 +62,25 @@ const NavBar = () => {
                 </Link>
               )}
             </Button>
+
             <Button
               variant="outline-light"
               className="text-white"
-              onClick={() => (token ? logout : "")}
+              onClick={token ? logout : ""}
             >
               <Image src={token ? lockOpen : lock} />{" "}
               {token ? (
                 <Link
-                  to="/login"
+                  to="/"
                   className="text-white ms-3 text-decoration-none"
                 >
                   Logout
                 </Link>
               ) : (
-                <Link
-                  to="/login"
-                  className="text-white ms-3 text-decoration-none"
-                >
+                  <Link
+                    to="/login"
+                    className="text-white ms-3 text-decoration-none"
+                  >
                   Login
                 </Link>
               )}

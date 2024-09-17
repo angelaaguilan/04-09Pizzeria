@@ -2,9 +2,10 @@ import CardPizza from '../component/CardPizza.jsx'
 import Row from "react-bootstrap/Row";
 import { Container } from 'react-bootstrap';
 import { useContext, useEffect } from "react";
-import CardContext from "../context/CardContext.jsx";
+import { CardContext } from "../context/CardContext.jsx";
 
 const Home = () => {
+
   // Datos de todas las pizza para genera las card de c/u (CONTEXT)
   const { pizzas, setPizzas } = useContext(CardContext);
  
@@ -20,7 +21,7 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
-
+   
   return (
     <>
       <Container fluid className=" py-3 mx-2">
